@@ -61,6 +61,7 @@ export default {
 
         }
     },
+    //方法块
     methods:{
         loadData(){
             let url = "http://localhost:6677/category/findAll"
@@ -69,15 +70,30 @@ export default {
             })
         },
         upDataHandler(row){
-
+            this.ruleform=row;
+            this.visible=true;
         },
-        deleteHandler(){
-
+        deleteHandler(id){
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+            }).then(() => {
+                    let url = "http://localhost:6677/category/deleteById"
+                    request.get(url+"?id="+id).then((response)=>{
+                        this.loadData()
+                        this.$message({
+                        type: 'success',
+                        message:response.message
+                        });
+                    })
+                    
+                })
         },
         toAddHandler(){
             this.visible=true
             this.form={
-                type:""
+                type:"category"
             }
         },
         closeModelHandler(){

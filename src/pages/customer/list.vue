@@ -103,7 +103,6 @@ export default {
                     })
             },
             toDeleteHandler(id){
-                this.loadData();
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -114,7 +113,7 @@ export default {
                         this.loadData()
                         this.$message({
                         type: 'success',
-                        message:response.message
+                        message:"删除成功"
                     });
                     })
                     
